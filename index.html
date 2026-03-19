@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resultado del Tamizaje</title>
+
+<style>
+body {
+font-family: Arial, sans-serif;
+text-align: center;
+padding: 30px;
+background: #f4f6f8;
+}
+
+.contenedor {
+max-width: 700px;
+margin: auto;
+background: white;
+padding: 25px;
+border-radius: 12px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+img {
+max-width: 100%;
+height: auto;
+margin-top: 20px;
+border-radius: 10px;
+}
+
+p {
+font-size: 18px;
+margin-top: 20px;
+}
+
+h1 {
+color: #333;
+}
+</style>
+</head>
+
+<body>
+
+<div class="contenedor">
+<h1>Resultado del Tamizaje</h1>
+
+<img id="tarjeta" src="" alt="Tarjeta de resultado">
+
+<p id="mensaje"></p>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const resultado = params.get("resultado");
+
+const tarjeta = document.getElementById("tarjeta");
+const mensaje = document.getElementById("mensaje");
+
+const tarjetas = {
+
+"VERDE": {
+img: "https://drive.google.com/uc?export=view&id=1rRAXq3Muv0rebhA46PsbR7Qjh-58paLM",
+msg: "No se detectan señales de riesgo importante. Se recomienda mantener hábitos saludables."
+},
+
+"AMARILLO": {
+img: "https://drive.google.com/uc?export=view&id=1vanu0QYHUG5Iujb2qjUDjkC4axCfjpaM",
+msg: "Se detectan señales leves o moderadas. Se recomienda prevención y seguimiento."
+},
+
+"NARANJA": {
+img: "https://drive.google.com/uc?export=view&id=1NfweRply59umyenf-pJJIqhXd8KmcIxi",
+msg: "Se detecta riesgo clínico relevante. Se recomienda evaluación profesional."
+},
+
+"ROJO": {
+img: "https://drive.google.com/uc?export=view&id=1m4muarOUTTWw71zE1QldtoIaagRng-r_",
+msg: "Se detecta una situación prioritaria. Se recomienda atención inmediata."
+}
+
+};
+
+if (tarjetas[resultado]) {
+tarjeta.src = tarjetas[resultado].img;
+mensaje.textContent = tarjetas[resultado].msg;
+} else {
+tarjeta.style.display = "none";
+mensaje.textContent = "No se encontró un resultado válido.";
+}
+
+</script>
+
+</body>
+</html>
